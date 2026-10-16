@@ -1,0 +1,75 @@
+create database if not exists update_aula
+default character set utf8mb4
+collate utf8mb4_general_ci;
+
+use update_aula;
+
+-- criação da tabela de produtos
+create table if not exists produtos (
+    id int auto_increment primary key,
+    nome varchar(50),
+    categoria varchar(30),
+    preco decimal(10,2),
+    estoque int
+) default charset = utf8mb4;
+
+-- inserção de dados em produtos
+insert into produtos (nome, categoria, preco, estoque) values
+('teclado gamer', 'periféricos', 150.00, 20),
+('mouse óptico', 'periféricos', 50.00, 15),
+('monitor 24"', 'monitores', 900.00, 8),
+('cadeira gamer', 'móveis', 1200.00, 5),
+('webcam hd', 'periféricos', 250.00, 12);
+
+-- criação da tabela de clientes
+create table if not exists clientes (
+    id int auto_increment primary key,
+    nome varchar(100),
+    email varchar(100),
+    cidade varchar(50)
+) default charset = utf8mb4;
+
+-- inserção de dados em clientes
+insert into clientes (nome, email, cidade) values
+('ana silva', 'ana.silva@email.com', 'são paulo'),
+('bruno souza', 'bruno.souza@email.com', 'rio de janeiro'),
+('carla costa', 'carla.costa@email.com', 'belo horizonte');
+
+-- conferir antes de atualizar
+select * from clientes;
+select * from produtos;
+
+-- ========== UPDATE (exemplos da aula) ==========
+
+-- 1) atualizar uma coluna
+update clientes
+set nome = 'ana silva siqueira'
+where id = 1;
+
+select * from clientes;
+
+-- 2) atualizar duas colunas de uma vez
+update clientes
+set nome = 'ana silva siqueira', cidade = 'campo mourão'
+where id = 1;
+
+select * from clientes;
+
+-- ========== UPDATE (prática com produtos) ==========
+
+-- novo preço do teclado
+update produtos
+set preco = 175.00
+where id = 1;
+
+-- repor estoque do monitor
+update produtos
+set estoque = 20
+where id = 3;
+
+-- mudar nome e categoria da webcam
+update produtos
+set nome = 'webcam full hd', categoria = 'câmeras'
+where id = 5;
+
+select * from produtos;
